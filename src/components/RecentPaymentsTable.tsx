@@ -39,7 +39,13 @@ export function RecentPaymentsTable({ payments }: RecentPaymentsTableProps) {
                     </span>
                   </td>
                   <td className={p.payment_type === 'refund' ? 'amount-negative' : 'amount-positive'}>
-                    {p.payment_type === 'refund' ? '-' : ''}€{Number(p.amount).toFixed(2)}
+                    {p.payment_type === 'refund' ? '-' : ''}
+                    {new Intl.NumberFormat('es-ES', {
+                      style: 'currency',
+                      currency: 'EUR',
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }).format(Math.abs(p.amount))}
                   </td>
                   <td>{new Date(p.paid_at).toLocaleString('es-ES')}</td>
                 </tr>

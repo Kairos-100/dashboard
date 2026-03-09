@@ -10,8 +10,12 @@ function formatCurrency(value: number) {
     style: 'currency',
     currency: 'EUR',
     minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+    maximumFractionDigits: 2,
   }).format(value)
+}
+
+function formatNumber(value: number) {
+  return new Intl.NumberFormat('es-ES').format(value)
 }
 
 function App() {
@@ -77,23 +81,23 @@ function App() {
         <section className="kpi-grid">
           <MetricCard
             title="Total usuarios"
-            value={metrics?.total_users ?? 0}
+            value={formatNumber(metrics?.total_users ?? 0)}
             icon="👥"
           />
           <MetricCard
             title="Suscripciones activas"
-            value={metrics?.active_subscriptions ?? 0}
+            value={formatNumber(metrics?.active_subscriptions ?? 0)}
             subtitle="active + trialing"
             icon="✓"
           />
           <MetricCard
             title="Trials este mes"
-            value={metrics?.trials_this_month ?? 0}
+            value={formatNumber(metrics?.trials_this_month ?? 0)}
             icon="🔄"
           />
           <MetricCard
             title="MAU"
-            value={metrics?.mau ?? 0}
+            value={formatNumber(metrics?.mau ?? 0)}
             subtitle="usuarios activos últimos 30 días"
             icon="📊"
           />
